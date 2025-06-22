@@ -4,7 +4,7 @@
 
 A Flutter widget that wraps [OctoImage](https://pub.dev/packages/octo_image) to enable asynchronously loading an `ImageProvider`, while retaining all of OctoImage's powerful features.
 
-This is useful when you need to perform some asynchronous work before you can determine which image provider to display, for example, fetching a FileImage or a NetworkImage based on
+This is useful when you need to perform some asynchronous work before you can determine which image provider to display, for example, loading a different ImageProvider based on any condition.
 
 ## Features
 
@@ -17,7 +17,7 @@ Add `async_image` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
-  async_image: ^1.0.0
+  async_image: ^1.0.1
 ```
 
 Then, run `flutter pub get` in your terminal.
@@ -35,10 +35,7 @@ Future<ImageProvider> _loadMetadataImageFromUrl(String url) async {
     throw Exception('Cannot load image from "$url"');
   }
 
-  return Future.delayed(
-    const Duration(seconds: 2),
-    () => NetworkImage(image),
-  );
+  return NetworkImage(image);
 }
 ```
 
