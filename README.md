@@ -17,7 +17,7 @@ Add `async_image` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
-  async_image: ^1.0.1
+  async_image: ^2.0.0
 ```
 
 Then, run `flutter pub get` in your terminal.
@@ -42,34 +42,23 @@ Future<ImageProvider> _loadMetadataImageFromUrl(String url) async {
 Then, use the `AsyncImage` widget in your UI and provide the future. You can also specify builders for placeholder, progress, and error states, just like you would with `OctoImage`.
 
 ```dart
-import 'package:async_image/async_image.dart';
-import 'package:flutter/material.dart';
+AsyncImage(
+  image: () => _loadMetadataImageFromUrl("https://pub.dev"),
+  width: 300,
+  height: 300,
+  // Optional: Show a placeholder while the image is loading
+  placeholderBuilder: (context) => const CircularProgressIndicator(),
+  // Optional: Show an error icon if the image fails to load
+  errorBuilder: (context, error, stackTrace) => const Icon(
+    Icons.error,
+    color: Colors.red,
+    size: 48,
+  ),
+);
+```
 
-class MyImageScreen extends StatelessWidget {
-  const MyImageScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('AsyncImage Example')),
-      body: Center(
-        child: AsyncImage(
-          image: _loadMetadataImageFromUrl("https://pub.dev"),
-          width: 300,
-          height: 300,
-          // Optional: Show a placeholder while the image is loading
-          placeholderBuilder: (context) => const CircularProgressIndicator(),
-          // Optional: Show an error icon if the image fails to load
-          errorBuilder: (context, error, stackTrace) => const Icon(
-            Icons.error,
-            color: Colors.red,
-            size: 48,
-          ),
-        ),
-      ),
-    );
-  }
-}
+```dart
+Image(image: AsyncImageProvider(() => _loadMetadataImageFromUrl("https://pub.dev")))
 ```
 
 ## Additional Information

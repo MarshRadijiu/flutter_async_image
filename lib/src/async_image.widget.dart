@@ -1,18 +1,12 @@
 import 'dart:async';
-import 'dart:ui' show Codec;
 
-import 'package:flutter/foundation.dart';
+import 'package:async_image/src/async.image_provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:octo_image/octo_image.dart';
 
-part 'never.image_provider.dart';
-
-/// A Future that resolves to an [ImageProvider].
-typedef AsyncImageProvider<T extends Object> = Future<ImageProvider<T>>;
-
 class AsyncImage extends StatelessWidget {
   /// The image that should be shown.
-  final AsyncImageProvider image;
+  final AsyncImageProviderCallback image;
 
   /// Optional builder to further customize the display of the image.
   final Widget Function(BuildContext context, Widget child)? imageBuilder;
@@ -225,42 +219,29 @@ class AsyncImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultProvider = _NeverImageProvider();
-
-    return FutureBuilder(
-      key: ValueKey(key ?? image),
-      future: image,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          defaultProvider.error(snapshot.error!, snapshot.stackTrace);
-        }
-
-        return OctoImage(
-          image: snapshot.data ?? defaultProvider,
-          imageBuilder: imageBuilder,
-          placeholderBuilder: placeholderBuilder,
-          progressIndicatorBuilder: progressIndicatorBuilder,
-          errorBuilder: errorBuilder,
-          placeholderFadeInDuration: placeholderFadeInDuration,
-          fadeOutDuration: fadeOutDuration,
-          fadeOutCurve: fadeOutCurve,
-          fadeInDuration: fadeInDuration,
-          fadeInCurve: fadeInCurve,
-          width: width,
-          height: height,
-          fit: fit,
-          alignment: alignment,
-          repeat: repeat,
-          matchTextDirection: matchTextDirection,
-          color: color,
-          colorBlendMode: colorBlendMode,
-          filterQuality: filterQuality,
-          gaplessPlayback: gaplessPlayback,
-          memCacheWidth: memCacheWidth,
-          memCacheHeight: memCacheHeight,
-        );
-      },
-      initialData: defaultProvider,
+    return OctoImage(
+      image: AsyncImageProvider(image),
+      imageBuilder: imageBuilder,
+      placeholderBuilder: placeholderBuilder,
+      progressIndicatorBuilder: progressIndicatorBuilder,
+      errorBuilder: errorBuilder,
+      placeholderFadeInDuration: placeholderFadeInDuration,
+      fadeOutDuration: fadeOutDuration,
+      fadeOutCurve: fadeOutCurve,
+      fadeInDuration: fadeInDuration,
+      fadeInCurve: fadeInCurve,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      matchTextDirection: matchTextDirection,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      filterQuality: filterQuality,
+      gaplessPlayback: gaplessPlayback,
+      memCacheWidth: memCacheWidth,
+      memCacheHeight: memCacheHeight,
     );
   }
 }

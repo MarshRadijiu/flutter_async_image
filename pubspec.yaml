@@ -1,6 +1,6 @@
 name: async_image
 description: "A Flutter widget that wraps OctoImage to enable asynchronously loading an `ImageProvider`, while retaining all of OctoImage's powerful features."
-version: 1.0.1
+version: 2.0.0
 repository: https://github.com/MarshRadijiu/flutter_async_image
 
 environment:

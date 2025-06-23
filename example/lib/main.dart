@@ -74,7 +74,7 @@ class _AsyncImageDemoState extends State<AsyncImageDemo> {
               width: 256,
               height: 256,
               child: AsyncImage(
-                image: _loadMetadataImageFromUrl(_link),
+                image: () => _loadMetadataImageFromUrl(_link),
                 placeholderBuilder: OctoPlaceholder.circularProgressIndicator(),
                 fit: BoxFit.cover,
               ),
