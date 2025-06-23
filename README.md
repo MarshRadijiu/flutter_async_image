@@ -17,7 +17,7 @@ Add `async_image` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
-  async_image: ^2.0.0
+  async_image: ^2.1.0
 ```
 
 Then, run `flutter pub get` in your terminal.

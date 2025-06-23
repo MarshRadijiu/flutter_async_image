@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Resolved stack overflow error on reportImageChunkEvent
+
 ## 2.0.0
 
 - Added AsyncImageProvider

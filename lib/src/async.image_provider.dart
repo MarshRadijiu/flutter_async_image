@@ -71,7 +71,7 @@ class AsyncImageStreamCompleter extends ImageStreamCompleter {
       _completer = completer;
       _listener = ImageStreamListener(
         (info, _) => setImage(info),
-        onChunk: (event) => completer.reportImageChunkEvent(event),
+        onChunk: (event) => reportImageChunkEvent(event),
         onError: (Object error, StackTrace? stack) {
           reportError(
             context: ErrorDescription('resolving an async image completer'),
